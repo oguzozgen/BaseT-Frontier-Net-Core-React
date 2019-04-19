@@ -19,6 +19,7 @@ namespace X_Frontier_Net_Core_React
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseUrls(urls: "http://localhost:5050");
     }
 }
