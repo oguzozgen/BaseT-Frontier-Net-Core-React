@@ -38,6 +38,11 @@ export default () => (
                     Admin
                   </Link>
                 </li>
+                <li>
+                  <Link style={linkStyle} to="/profile">
+                    Profile
+                  </Link>
+                </li>
                 <button onClick={props.logout}>logout</button>
               </ul>
             ) : (

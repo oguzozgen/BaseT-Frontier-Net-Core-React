@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthenticationProvider, oidcLog } from "@axa-fr/react-oidc-context";
-import Header from "./components/Layout/Header";
+import Layouttheme from "./components/Layouttheme/Layouttheme";
 import Routes from "./Router/Routes";
 import oidcConfiguration from "./configuration";
 export default class App extends Component {
@@ -15,7 +15,7 @@ export default class App extends Component {
           configuration={oidcConfiguration}
           loggerLevel={oidcLog.DEBUG}
         >
-          <Header />
+          <Layouttheme />
           <Routes />
         </AuthenticationProvider>
       </Router>
