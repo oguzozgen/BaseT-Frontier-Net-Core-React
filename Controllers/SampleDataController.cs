@@ -27,7 +27,7 @@ namespace X_Frontier_Net_Core_React.Controllers
         }
 
         public class WeatherForecast
-        {
+        {    
             public string DateFormatted { get; set; }
             public int TemperatureC { get; set; }
             public string Summary { get; set; }
