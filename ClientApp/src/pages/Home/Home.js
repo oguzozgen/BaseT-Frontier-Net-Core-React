@@ -65,7 +65,7 @@ const enhanceFetch = compose(
     handleClick: e => {
       e.preventDefault();
       props
-      .fetch('http://localhost:5220/api/values/merhabain')
+      .fetch('http://localhost:5220/api/values')
       .then(res => res.json())
       .then(json => console.log({ data: json }))
       .catch(e => alert(e));
