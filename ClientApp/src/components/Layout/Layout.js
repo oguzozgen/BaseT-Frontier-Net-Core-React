@@ -1,28 +1,33 @@
 import React,{Component, useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Button, Heading, Grommet } from 'grommet';
-import { Notification } from 'grommet-icons';
+import { Box, Button, Heading, Grommet,Text,Menu ,Grid} from 'grommet';
+import { Notification, User, Yoga, Home,Login,Logout } from 'grommet-icons';
 import ContainerLayout from './components/ContainerLayout/ContainerLayout';
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "../../Router/Routes";
 
 const linkStyle = {
-    color: 'white',
-    textDecoration: 'underline',
+  color:'#6d6d6e',
+  font: {
+    family: 'Roboto',
+    size: '26px',
+    height: '20px',      
+  },
   };
   
   const theme = {
     global: {
-        colors: {
-      brand: '#228BE6',
-     },
+      colors: {
+        brand:'linear-gradient(45deg, #8baaaa 0%, #ae8b9c 100%)',    
+     }, 
       font: {
         family: 'Roboto',
-        size: '14px',
-        height: '20px',
+        size: '26px',
+        height: '20px',      
       },
     },
   };
+
   
 const headerStyle = {
     display: 'flex',
@@ -37,8 +42,9 @@ const AppBar = (props) => (
       align='center'
       justify='between'
       background='brand'
-      pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-      elevation='medium'
+      pad={{ left: 'small', right: 'small', vertical: 'small' }}
+      elevation='small'
+      margin='small'
       style={{ zIndex: '1' }}
       {...props}
     />
@@ -49,20 +55,38 @@ function Layout(props) {
       
     return (
             <div>                                
-                    <Grommet theme={theme} full>
+                  <Grommet theme={theme} full>
                     <Box fill>
                             <AppBar>
-                                <h3>
-                                <Link style={linkStyle} to="/">
-                                HOME
-                                </Link>
-                                </h3>
-                                <Heading level='3' margin='none'>My Apsp</Heading>
-                                <Button icon={<Notification />} onClick={() => {}} />
+                              
+                                    <Grid align="start">
+                                        
+                                    </Grid>
+                                    <Grid align="center">                                         
+                                          <Link style={linkStyle} to="/">
+                                           BRAND
+                                          </Link>
+                                    </Grid>
+                                    <Grid align="end" direction='row'>
 
+                                            {props.oidcUser || !props.isEnabled ? (
+                                                      <Box direction='row'>
+                                                            <Link style={linkStyle} to="/profile">
+                                                                <User size="medium" title="Profile"/>
+                                                            </Link>
+                                                            <Link style={linkStyle} to="/admin">
+                                                                <Notification size="medium" title="Notification"/>
+                                                            </Link>                                           
+                                                            <Button onClick={props.logout}> <Logout size="medium"  title="Logout"/></Button>
+                                                        </Box>
+                                                  ) : (
+                                                          <Button onClick={props.login}> <Login size="medium"  title="Login"/></Button>
+                                                      )
+                                              }
+
+                                    </Grid>         
                             </AppBar>
-                            <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-                                <Box flex align='center' justify='center'>                                  
+                            <Box flex align='center' justify='center'>                                  
                                   <ContainerLayout>    
 
                                     
@@ -70,39 +94,6 @@ function Layout(props) {
 
                                     
                                  </ContainerLayout>                                 
-                                </Box>
-                                <Box
-                                width='medium'
-                                background='light-2'
-                                elevation='small'
-                                align='center'
-                                justify='center'
-                                >
-                                            {props.oidcUser || !props.isEnabled ? (
-
-                                                    <ul>
-                                                    <li>
-                                                        <Link style={linkStyle} to="/dashboard">
-                                                        Dashboard
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link style={linkStyle} to="/admin">
-                                                        Admin
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link style={linkStyle} to="/profile">
-                                                        Profile
-                                                        </Link>
-                                                    </li>
-                                                    <button onClick={props.logout}>logout</button>
-                                                    </ul>
-                                                  ) : (
-                                                     <button onClick={props.login}>login</button>
-                                                  )
-                                            }
-                                </Box>
                             </Box>
                         </Box>
                     </Grommet>
@@ -113,3 +104,18 @@ function Layout(props) {
 }
 
 export default Layout;
+
+
+/* 
+        <Menu
+        dropProps={{ align: { top: "bottom", left: "left" } }}
+        label="actions"
+        items={[
+        { label: "Homr", onClick: () => { <Link style={linkStyle} to="/"></Link>} },
+        { label: "DashBoard", onClick: () => { <Link style={linkStyle} to="/dashboard"></Link>} },
+        { label: "Profile", onClick: () => {  <Link style={linkStyle} to="/profile"> </Link>} },
+        { label: "Admin", onClick: () => {  <Link style={linkStyle} to="/admin"> </Link>} },
+        { label: "Disabled", disabled: true }
+        ]}
+        />
+                                     */
