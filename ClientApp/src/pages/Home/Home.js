@@ -15,13 +15,16 @@ const fetchMock = status => (url, options) => {
 };
 
 const enhance401 = compose(
-  withAuthentication(fetchMock(401)),
+  withAuthentication(),
   withProps(props => ({
     handleClick: e => {
       e.preventDefault();
       props
-        .fetch('http://www.demo.url')
-        .then(() => alert('fetch end'))
+        .fetch('http://localhost:5220/api/values')
+        .then((data) => {
+            alert("wtf");
+            console.log(data);
+        })
         .catch(e => alert(e));
     },
   })),
@@ -62,9 +65,12 @@ const enhanceFetch = compose(
     handleClick: e => {
       e.preventDefault();
       props
-        .fetch('http://localhost:3000/')
-        .then(() => alert('fetch end'))
-        .catch(e => alert(e));
+      .fetch('http://localhost:5220/api/values/merhabain')
+      .then(res => res.json())
+      .then(json => console.log({ data: json }))
+      .catch(e => alert(e));
+   
+       
     },
   })),
 );
